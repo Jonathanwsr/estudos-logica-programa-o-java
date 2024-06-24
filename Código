@@ -1,0 +1,50 @@
+# Algoritmo em java que faz um login de uma pessoa e mostra suas informações na tela novamente
+
+
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+
+public class LoginSystem {
+
+    
+    private static Map<String, String> users = new HashMap<>();
+    private static Map<String, String> userInfo = new HashMap<>();
+
+    public static void main(String[] args) {
+        // Adding some dummy users
+        users.put("user1", "password1");
+        userInfo.put("user1", "Nome: João Silva\nIdade: 25\nEmail: joao.silva@example.com");
+        
+        users.put("user2", "password2");
+        userInfo.put("user2", "Nome: Maria Oliveira\nIdade: 30\nEmail: maria.oliveira@example.com");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Bem-vindo ao Sistema de Login");
+
+        
+        System.out.print("Digite seu username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Digite sua senha: ");
+        String password = scanner.nextLine();
+
+        
+        if (authenticate(username, password)) {
+            System.out.println("Login bem-sucedido!");
+            // Displaying user information
+            System.out.println("Informações do usuário:");
+            System.out.println(userInfo.get(username));
+        } else {
+            System.out.println("Username ou senha incorretos. Tente novamente.");
+        }
+
+        scanner.close();
+    }
+
+    
+    private static boolean authenticate(String username, String password) {
+        return users.containsKey(username) && users.get(username).equals(password);
+    }
+}
